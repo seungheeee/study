@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.web.dao.boardDAO">
+	<resultMap id="board" type="com.board.web.vo.BoardVO">
+		<result property="no" column="NO"/>
+		<result property="rownum" column="ROWNUM"/>
+		<result property="name" column="NAME"/>
+		<result property="subject" column="SUBJECT"/>
+		<result property="content" column="CONTENT"/>
+		<result property="date" column="DATE"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.board.web.vo.BoardVO">
+		INSERT INTO BOARD
+			(NAME, SUBJECT, CONTENT, DATE)
+		VALUES 
+			 (#{name}
+			, #{subject}
+			, #{content}
+			, NOW())
+	</insert>
+	
+	<select id="select" parameterType="int" resultMap="board">
+		SELECT NO, NAME, SUBJECT, CONTENT, DATE
+		FROM BOARD
+		WHERE NO=#{no}
+	</select>
+	
+	<select id="boardList" resultMap="board">
+         <![CDATA[SELECT   @ROWNUM:=@ROWNUM+1 AS ROWNUM, NO, NAME, CONTENT, SUBJECT, DATE
+         FROM BOARD, (SELECT @ROWNUM:=0) TMP]]>
+   </select>
+	
+	<update id="update" parameterType="com.board.web.vo.BoardVO">
+		UPDATE BOARD
+		SET NO		= #{no},
+			NAME 	= #{name},
+			SUBJECT = #{subject},
+			CONTENT = #{content},
+			DATE 	= NOW()
+		WHERE NO = #{no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM BOARD
+		WHERE NO = #{no}
+	</delete>
+</mapper>
