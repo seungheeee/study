@@ -8,12 +8,11 @@
  * 확인 사항 : 
  *      
  */
-package board.fwd.web;
+package com.board.web.controller;
 
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +21,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import board.fwd.service.BoardService;
-import board.fwd.service.BoardVO;
-import board.fwd.service.impl.BoardDAO;
+import com.board.web.dao.BoardDAO;
+import com.board.web.service.BoardService;
+import com.board.web.vo.BoardVO;
 
 @Controller
 public class BoardController{

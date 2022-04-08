@@ -1,6 +1,8 @@
-package board.fwd.service;
+package com.board.web.service;
 
 import java.util.List;
+
+import com.board.web.vo.BoardVO;
 
 public interface BoardService{
 	public void write(BoardVO boardVO) throws Exception;

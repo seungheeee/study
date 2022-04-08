@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package board.cmmn.web;
+package com.board.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,7 +41,7 @@ import org.springframework.web.context.request.WebRequest;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
-public class EgovBindingInitializer implements WebBindingInitializer {
+public class BoardBindingInitializer implements WebBindingInitializer {
 
 	/**
 	* initBinder
