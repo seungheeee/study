@@ -13,7 +13,7 @@
 		
     const formCheck = document.myForm;
 	
-    if(!formCheck.name.value) {
+    if(formCheck.name.value == "") {
     	alert("이름을 입력해 주세요.");
     	formCheck.name.focus();
     	return;
@@ -38,13 +38,13 @@
 	<h2>게시글 작성</h2>
 	<form name = "myForm" action="" method="post">
 		작성자
-		<input type="text" name="name" placeholder="이름을 입력해주세요.">
+		<input type="text" name="name" placeholder="이름을 입력해주세요." minlength="1" maxlength="20">
 		<br>
 		글제목
-		<input type="text" name="subject" placeholder="제목을 입력해주세요.">
+		<input type="text" name="subject" placeholder="제목을 입력해주세요." maxlength="20">
 		<br>
 		내용&nbsp;&nbsp;&nbsp;&nbsp;
-		<textarea name="content" rows="20" placeholder="내용을 입력해주세요."></textarea>
+		<textarea name="content" rows="20" placeholder="내용을 입력해주세요." maxlength="50"></textarea>
 		<br>
    		<button type="submit" onclick="sendIt();"> 등록</button>
    		<button type="button" onclick="location.href='list.do'"> 취소</button>
