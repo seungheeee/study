@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.web.dao.BoardDAO">
+	<resultMap id="board" type="com.board.web.vo.BoardVO">
+		<result property="no" column="NO"/>
+		<result property="rownum" column="ROWNUM"/>
+		<result property="name" column="NAME"/>
+		<result property="subject" column="SUBJECT"/>
+		<result property="content" column="CONTENT"/>
+		<result property="date" column="DATE"/>
+	</resultMap>
+	
+	<!-- 사용자가 작성한 내용 데이터 저장 -->
+	<insert id="insert" parameterType="com.board.web.vo.BoardVO">
+		INSERT INTO BOARD
+			(NAME, SUBJECT, CONTENT, DATE)
+		VALUES 
+			 (#{name}
+			, #{subject}
+			, #{content}
+			, NOW())
+	</insert>
+	
+	<!-- 리스트에서 선택한 글의 내용 전체를 확인 -->
+	<select id="select" parameterType="int" resultMap="board">
+		SELECT NO, NAME, SUBJECT, CONTENT, DATE
+		FROM BOARD
+		WHERE NO=#{no}
+	</select>
+	
+	<!-- 저장된 글의 리스트 조회 -->
+	<select id="boardList" resultMap="board">
+         <![CDATA[SELECT   @ROWNUM:=@ROWNUM+1 AS ROWNUM, NO, NAME, CONTENT, SUBJECT, DATE
+         FROM BOARD, (SELECT @ROWNUM:=0) TMP]]>
+   </select>
+	
+	<!-- 게시글의 내용을 수정하여 데이터에 저장 -->
+	<update id="update" parameterType="com.board.web.vo.BoardVO">
+		UPDATE BOARD
+		SET NAME 	= #{name},
+			SUBJECT = #{subject},
+			CONTENT = #{content},
+			DATE 	= NOW()
+		WHERE NO = #{no}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM BOARD
+		WHERE NO = #{no}
+	</delete>
+	
+	<!-- 선택 삭제 -->
+	<delete id="deleteSelect" parameterType="_int[]">
+		DELETE
+		FROM BOARD
+		WHERE NO
+		IN (#{checkno})
+	</delete>
+</mapper>
