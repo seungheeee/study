@@ -1,2 +1,3 @@
 # study
-패스트캠퍼스 스프링 강의 공부내용 정리
+- Spring
+servlet에서 spring으로 변화 과정 학습
